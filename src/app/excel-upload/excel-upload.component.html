@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Link Information Management System</h1>
+    <form (ngSubmit)="onSubmit()" [formGroup]="uploadForm" novalidate>
+      <div class="form-group">
+        <label for="excelUrl">Excel File URL: </label>
+        <input
+          type="file"
+          id="excelUrl"
+          class="form-control"
+          formControlName="excelUrl"
+          (change)="onFileChange($event)"
+          accept=".xls,.xlsx"
+          required
+        />
+        <div *ngIf="excelUrl?.invalid && (excelUrl?.dirty || excelUrl?.touched)" class="error">
+          <div *ngIf="excelUrl?.errors?.['required']">This field is required.</div>
+          <div *ngIf="excelUrl?.errors?.['pattern']">Only Excel files are allowed.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="uploadForm.invalid">Submit</button>
+    </form>
+    <div *ngIf="message" class="alert alert-info" class="success">
+        {{ message }}
+      </div>
+  </div>
+  
